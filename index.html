@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <title>Snake</title>
+        <script>
+            const snakebody = "XXXXXXXXXX";
+            const snake_swing = 32;
+            let count = 0;
+            abs = (x) => x>0 ? x : -x;
+            const snakehead = "<h2>Y</h2><h2>|</h2><h2>|</h2><h2>X</h2><h2>XXX</h2><h2>XXXXXXX</h2><h2>XXXXXXXXX</h2><h2>XXXXXXXXXXX</h2><h2>XXOXXXXXXXOXX</h2><h2>XXXXXXXXXXXX</h2>";
+            snakeline = () => {
+                    if (window.innerHeight + window.scrollY >= 0.8 * document.body.offsetHeight){
+                        while (window.innerHeight + window.scrollY >= 0.8 * document.body.offsetHeight){
+                            let newsnake = "";
+                            for(let i = 0; i< abs(abs(count % (snake_swing/2)-(snake_swing/4))-snake_swing/4) && (count % snake_swing <  (snake_swing/2)); i++){
+                                newsnake += "&nbsp&nbsp";
+                            }
+                            newsnake += snakebody;
+                            for(let i = 0; i< abs(abs(count % (snake_swing/2)-(snake_swing/4))-snake_swing/4) && (count % snake_swing >=  (snake_swing/2)); i++){
+                                newsnake += "&nbsp&nbsp";
+                            }
+                            snake_h = document.createElement("h2");
+                            snake_h.innerHTML = newsnake;
+                            snake.append(snake_h);
+                            count++;
+                            count = count == snake_swing? 0: count;
+                        }
+                    }
+                };
+            document.addEventListener("DOMContentLoaded",() => {
+                const snake = document.querySelector("#snake");
+                snake.innerHTML = snakehead;
+                snakeline();
+                window.onscroll = snakeline;
+                
+            });
+        </script>
+
+        <style>
+            body {
+                text-align: center;
+                background-color: black;
+                color: white;
+            }
+        </style>
+    </head>
+    <body>
+        <h1 style="padding: 5vh;"><a style="text-decoration: none;color: inherit; " href="https://kardandon.github.io"> Snake </a></h1>
+        <div id="snake">
+
+        </div>
+    </body>
+</html>
